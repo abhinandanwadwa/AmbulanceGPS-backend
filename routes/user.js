@@ -29,19 +29,29 @@ router.post("/register", [
     }
 
     try {
-        const { phone, name, email, city, address, ownVehicle } = req.body;
+        const { phone, name, email, city, address, ownVehicle, password } = req.body;
+
+        let salt = await bcrypt.genSalt(10);
+        let hash = await bcrypt.hash(password, salt);
+
         const newUser = await UserSchema.create({
             phone,
             name,
             email,
             city,
             address,
-            ownVehicle
+            ownVehicle,
+            password: hash
         });
-        if (!newUser) {
-            return res.status(500).json({ error: "Internal Server Error" });
+
+        let payload = {
+            user: {
+                id: newUser.id
+            }
         }
-        return res.status(200).json(newUser);
+
+        const authtoken = jwt.sign(payload, JWT_SECRET);
+        res.json({ authtoken });
         
     } catch (error) {
         console.error(error);
