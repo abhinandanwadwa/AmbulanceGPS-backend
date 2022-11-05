@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 
-const UserSchema = new Schema({
+const DriverSchema = new Schema({
     phone: {  // To be verified using OTP
         type: Number,
         required: true
@@ -18,14 +18,6 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    address: {
-        type: String,
-        required: true
-    },
-    ownVehicle: {
-        type: Boolean,
-        default: false
-    },
 }, {timestamps: true});
 
-module.exports = mongoose.model('user', UserSchema);
+module.exports = mongoose.model('driver', DriverSchema);
