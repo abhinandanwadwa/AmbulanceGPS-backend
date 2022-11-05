@@ -36,6 +36,10 @@ const VehicleSchema = new Schema({
         data: Buffer,
         contentType: String,
         required: false
+    },
+    registeredCompany: {
+        type: String,
+        required: true
     }
 }, {timestamps: true});
 

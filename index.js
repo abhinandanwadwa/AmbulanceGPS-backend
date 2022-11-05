@@ -12,6 +12,9 @@ app.use(cors());
 
 // Available Routes
 // app.use('/api/auth', require('./routes/auth'));
+app.use('/api/user', require('./routes/user'));
+app.use('/api/vehicle', require('./routes/vehicle'));
+app.use('/api/driver', require('./routes/driver'));
 
 app.get('/', (req, res) => {
     res.send('Hi!');
